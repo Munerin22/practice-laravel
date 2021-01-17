@@ -1,11 +1,6 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
 @section('content')
+
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
@@ -23,7 +18,7 @@
 @foreach ($items as $item)
 <!-- 商品のレコード一覧表示 -->
 <tr>
-<td><a href="{{route('detail', ['name' => $item['name']])}}">{{$item['name']}}</a></td>
+<td><a href="{{route('detail', ['id' => $item['id']])}}">{{$item['name']}}</a></td>
 <td>{{$item['price']}}円</td>
 @if ($item['stock'] >= 1)
 <td>在庫あり</td>
@@ -35,5 +30,3 @@
 </table>
 
 @endsection
-</body>
-</html>

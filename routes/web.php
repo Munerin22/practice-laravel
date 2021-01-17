@@ -16,7 +16,7 @@
 //});
 
 Route::get('/', 'ItemController@index')->name('index');
-Route::get('/detail/{name?}', 'ItemController@detail')->name('detail');
+Route::get('/detail/{id?}', 'ItemController@detail')->name('detail');
 
 Auth::routes();
 

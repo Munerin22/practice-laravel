@@ -1,11 +1,6 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
 @section('content')
+
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
@@ -35,6 +30,5 @@
 </table>
 
 <a href="{{route('index')}}">商品一覧</a>
+
 @endsection
-</body>
-</html>

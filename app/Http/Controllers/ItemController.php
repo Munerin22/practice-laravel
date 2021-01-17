@@ -11,9 +11,9 @@ class ItemController extends Controller {
 		return view('item.index', compact('items'));
 	}
 
-	public function detail($item_name = null) {
+	public function detail($item_id = null) {
 		//DBからURLパラメータの商品レコードを取得
-		$item_detail = Item::Where('name', $item_name)->first();
+		$item_detail = Item::where('id', $item_id)->first();
 		//$detailItemがあるかどうか確認
 		if ($item_detail) {
 			return view('item.detail', compact('item_detail'));
