@@ -46,4 +46,12 @@ class LoginController extends Controller
 	{
 		$this->middleware('guest')->except('logout');
 	}
+
+	//ログアウト処理
+	public function logout(Request $request)
+	{
+		$this->guard('admin')->logout();
+		// $request->session()->invalidate();全部のSessionを消してしまう
+		return redirect('/');
+	}
 }

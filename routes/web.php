@@ -23,6 +23,7 @@ Auth::routes();
 //Userログイン
 Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/home', 'HomeController@index')->name('home');
+	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
 //Authログイン
@@ -34,6 +35,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function() {
 	Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login.submit');
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
-	Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
+	Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
 });
