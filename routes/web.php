@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-//Authログイン
+//adminログイン
 Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function() {
 	Route::get('/', function () {
 		return redirect('/admin/home');

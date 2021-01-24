@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -44,4 +45,18 @@ class LoginController extends Controller
 		$this->guard()->logout();
 		return redirect('/');
 	}
+
+
+	//Twitter認証のログイン
+	public function redirectToProvider()
+	{
+		return Socialite::driver('twitter')->redirect();
+	}
+
+	//Twitterからユーザー情報を取得
+	public function handleProviderCallback()
+	{
+		$user = Socialite::driver('twitter')->user();
+	}
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-$conf = [
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -195,13 +195,3 @@ $conf = [
     'same_site' => null,
 
 ];
-
-// 管理画面のセッションクッキーを変更する
-$uri = isset($SERVER['REQUEST_URI']) ? $SERVER['REQUEST_URI'] : '';
-if (strpos($uri, '/admin/') === 0 || $uri === '/admin') {
-	$conf['cookie'] = env(
-	'SESSIONCOOKIE_ADMIN',
-	str_slug(env('APPNAME', 'laravel'), '_').'_admin_session'
-	);
-}
-return $conf;
