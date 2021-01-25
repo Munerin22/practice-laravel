@@ -7,7 +7,6 @@
 <div class="panel panel-default">
 <div class="panel-heading">商品情報</div>
 <div class="panel-body">
-
 <table border="1"align=center>
 <tr>
 <th>商品名</th>

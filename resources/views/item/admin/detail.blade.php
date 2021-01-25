@@ -7,7 +7,7 @@
 <div class="panel panel-default">
 <div class="panel-heading">商品情報</div>
 <div class="panel-body">
-<a href="{{route('admin.edit')}}">商品の編集</a>
+<a href="{{route('admin.edit', ['id' => $item_detail['id']])}}">商品の編集</a>
 
 <table border="1"align=center>
 <tr>

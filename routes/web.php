@@ -43,8 +43,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	//Admin側商品ページ
 	Route::get('/index', 'ItemController@index')->name('admin.index');
 	Route::get('/detail/{id?}', 'ItemController@detail')->name('admin.detail');
-	Route::get('/add', 'ItemController@add')->name('admin.add');
+	//商品追加フォームと追加処理
+	Route::get('/add', function() {
+		return view('item.admin.add');
+	})->name('admin.add');
+	Route::post('/add/item', 'ItemController@add')->name('admin.add.item');
+	//商品編集フォームと編集処理
 	Route::get('/edit/{id?}', 'ItemController@edit')->name('admin.edit');
+	Route::post('/update', 'ItemController@update')->name('admin.update');
 });
 
 //twitterログイン
