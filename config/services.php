@@ -38,7 +38,7 @@ return [
 	//Twitter用の設定
 	'twitter' => [
 		'client_id' => env('TWITTER_API_KEY'),
-		'client_secret' => env('TWITTER_API_KEY'),
+		'client_secret' => env('TWITTER_API_SECRET'),
 		'redirect' => env('TWITTER_CALLBACK'),
 	]
 

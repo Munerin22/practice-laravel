@@ -16,11 +16,11 @@ class AddTwitterAPIToUsersTable extends Migration
 		//TwitterAPI用のカラム追加
         Schema::table('users', function (Blueprint $table) {
             //
-			$table->integer('twitter_id');//ツイッター側のID
-			$table->string('access_token');//APIを使用するためのアクセストークン
-			$table->string('access_token_secret');//APIを使用する為のアクセストークンシークレット
-			$table->string('avatar');//ツイッター側の画像を保存
-			$table->string('profile');//ツイッターのプロフィールを保存
+			$table->integer('twitter_id')->nullable();//ツイッター側のID
+			$table->string('access_token')->nullable();//APIを使用するためのアクセストークン
+			$table->string('access_token_secret')->nullable();//APIを使用する為のアクセストークンシークレット
+			$table->string('avatar')->nullable();//ツイッター側の画像を保存
+			$table->string('profile')->nullable();//ツイッターのプロフィールを保存
 
         });
     }

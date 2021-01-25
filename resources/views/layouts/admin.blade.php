@@ -29,9 +29,9 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="{{ url('/admin/home') }}">
+				<a class="navbar-brand" href="{{ url('/admin/index') }}">
 					<!--{{ config('app.name', 'Laravel') }}-->
-					Admin-Home
+					Item-List-Admin
 				</a>
 			</div>
 
