@@ -10,7 +10,7 @@
 <a href="{{route('admin.index')}}">商品一覧</a>
 
 @if (count($errors) > 0)
-<li style="list-style:none"><font color="red">==入力されていない項目があります==</font></li>
+<li style="list-style:none"><font color="red">==入力内容に不備があります==</font></li>
 @endif
 
 <form method="POST" action="add/item">
@@ -36,7 +36,7 @@
 @endif
 <li><div>在庫：<input type="text" name="stock">個</div></li>
 </ul>
-<input type="submit">
+<input type="submit" value="商品の追加">
 </form>
 
 @endsection

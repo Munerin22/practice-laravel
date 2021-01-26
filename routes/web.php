@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function() {;
 //adminログイン
 Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function() {
 	Route::get('/', function () {
-		return redirect('/admin/home');
+		return redirect('/admin/index');
 	});
 	Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
 	Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login.submit');
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function() {
 //adminログイン後にアクセス可
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
-	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
+	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
 
 	//Admin側商品ページ
 	Route::get('/index', 'ItemController@index')->name('admin.index');
@@ -47,10 +47,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::get('/add', function() {
 		return view('item.admin.add');
 	})->name('admin.add');
+	Route::get('/add/item', 'ItemController@index');//URL直叩き防止
 	Route::post('/add/item', 'ItemController@add')->name('admin.add.item');
 	//商品編集フォームと編集処理
 	Route::get('/edit/{id?}', 'ItemController@edit')->name('admin.edit');
-	Route::post('/update', 'ItemController@update')->name('admin.update');
+	Route::post('/edit/item', 'ItemController@update')->name('admin.update');
 });
 
 //twitterログイン

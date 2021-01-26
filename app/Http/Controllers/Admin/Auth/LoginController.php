@@ -26,7 +26,7 @@ class LoginController extends Controller
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/admin/home';//ログイン後のリダイレクト先
+	protected $redirectTo = '/admin/index';//ログイン後のリダイレクト先
 
 	//ログイン画面
 	public function showLoginForm() {
