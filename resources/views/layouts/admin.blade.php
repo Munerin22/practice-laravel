@@ -12,6 +12,7 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<style>body{background-color: #f0ffd0;}</style>
 </head>
 <body>
 <div id="app">
@@ -28,9 +29,9 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="{{ url('/') }}">
-					<!--{{ config('app.name', 'Laravel') }}i-->
-					Item-List
+				<a class="navbar-brand" href="{{ url('/admin/index') }}">
+					<!--{{ config('app.name', 'Laravel') }}-->
+					Item-List-Admin
 				</a>
 			</div>
 
@@ -43,31 +44,30 @@
 				<!-- Right Side Of Navbar -->
 				<ul class="nav navbar-nav navbar-right">
 					<!-- Authentication Links -->
-					@guest
-						<li><a href="{{ route('login') }}">User-Login</a></li>
-						<li><a href="{{ route('register') }}">User-Register</a></li>
-					@else
+					@if (Auth::guard('admin')->check())
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-								{{ Auth::user()->name }} <span class="caret"></span>
+								{{ Auth::guard('admin')->user()->name}} <span class="caret"></span>
 							</a>
 
 							<ul class="dropdown-menu">
 								<li>
-									<a href="{{ route('logout') }}"
+									<a href="{{ route('admin.logout') }}"
 										onclick="event.preventDefault();
 												 document.getElementById('logout-form').submit();">
-										User-Logout
+										Admin-Logout
 									</a>
 
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
 										{{ csrf_field() }}
 									</form>
 								</li>
 							</ul>
 						</li>
-					@endguest
-					<li><a href="{{ route('admin.home') }}">Admin-Home</a></li>
+					@else
+						<li><a href="{{ route('admin.login') }}">Admin-Login</a></li>
+					@endif
+					<li><a href="{{ route('home') }}">User-Home</a></li>
 				</ul>
 			</div>
 		</div>

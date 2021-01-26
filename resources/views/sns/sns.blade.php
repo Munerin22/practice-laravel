@@ -5,29 +5,28 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
-<div class="panel-heading">商品情報</div>
+<div class="panel-heading">Twitter認証</div>
 <div class="panel-body">
+
 <table border="1"align=center>
 <tr>
 <th>商品名</th>
-<th>商品説明</th>
 <th>値段</th>
 <th>在庫の有無</th>
 </tr>
 
-<!-- 商品情報の表示 -->
+@foreach ($items as $item)
+<!-- 商品のレコード一覧表示 -->
 <tr>
-<td>{{$item_detail['name']}}</td>
-<td>{{$item_detail['explain']}}</td>
-<td>{{$item_detail['price']}}円</td>
-@if ($item_detail['stock'] >= 1)
+<td><a href="{{route('detail', ['id' => $item['id']])}}">{{$item['name']}}</a></td>
+<td>{{$item['price']}}円</td>
+@if ($item['stock'] >= 1)
 <td>在庫あり</td>
 @else
 <td>在庫無し</td>
 @endif
 </tr>
+@endforeach
 </table>
-
-<a href="{{route('index')}}">商品一覧</a>
 
 @endsection

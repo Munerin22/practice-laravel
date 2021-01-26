@@ -15,9 +15,46 @@
 	//return view('welcome');
 //});
 
+//User側商品ページ
 Route::get('/', 'ItemController@index')->name('index');
 Route::get('/detail/{id?}', 'ItemController@detail')->name('detail');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Userログイン後にアクセス可
+Route::group(['middleware' => 'auth'], function() {;
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+});
+
+//adminログイン
+Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function() {
+	Route::get('/', function () {
+		return redirect('/admin/index');
+	});
+	Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+	Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login.submit');
+});
+//adminログイン後にアクセス可
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+	Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
+	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+
+	//Admin側商品ページ
+	Route::get('/index', 'ItemController@index')->name('admin.index');
+	Route::get('/detail/{id?}', 'ItemController@detail')->name('admin.detail');
+	//商品追加フォームと追加処理
+	Route::get('/add', function() {
+		return view('item.admin.add');
+	})->name('admin.add');
+	Route::get('/add/item', 'ItemController@index');//URL直叩き防止
+	Route::post('/add/item', 'ItemController@add')->name('admin.add.item');
+	//商品編集フォームと編集処理
+	Route::get('/edit/{id?}', 'ItemController@edit')->name('admin.edit');
+	Route::post('/edit/item', 'ItemController@update')->name('admin.update');
+});
+
+//twitterログイン
+Route::get('/sns/twitter/login', 'SnsController@getAuth')->name('sns.login');
+Route::get('/sns/twitter/callback', 'SnsController@authCallback')->name('sns.callback');
+

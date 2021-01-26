@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 <div class="container">
@@ -7,6 +7,8 @@
 <div class="panel panel-default">
 <div class="panel-heading">商品情報</div>
 <div class="panel-body">
+<a href="{{route('admin.edit', ['id' => $item_detail['id']])}}">商品の編集</a>
+
 <table border="1"align=center>
 <tr>
 <th>商品名</th>
@@ -28,6 +30,6 @@
 </tr>
 </table>
 
-<a href="{{route('index')}}">商品一覧</a>
+<a href="{{route('admin.index')}}">商品一覧</a>
 
 @endsection

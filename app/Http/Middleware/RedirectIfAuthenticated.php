@@ -17,8 +17,20 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+		//管理者用も追加
+		$redir = '/home';
+		switch ($guard) {
+			case "admin":
+				$redir = '/admin/index';
+				break;
+			default:
+				$redir = '/';
+				break;
+			}
+		//ここまで
+
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect($redir); //'/home'->$redirに変更
         }
 
         return $next($request);
