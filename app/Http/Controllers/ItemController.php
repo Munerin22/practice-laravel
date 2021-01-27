@@ -59,6 +59,7 @@ class ItemController extends Controller {
 	public function edit($item_id = null) {
 		$item_edit = Item::where('id', $item_id)->first();
 		if ($item_edit) {
+			session()->put('edit_id', $item_id);
 			return view('item.admin.edit', compact('item_edit'));
 		} else {
 			return redirect()->route('admin.index');
@@ -68,12 +69,20 @@ class ItemController extends Controller {
 	//商品の更新
 	public function update(ItemEditRequest $request) {
 		//商品情報の更新
+		$request->id = session()->get('edit_id');
 		$item_update = Item::find($request->id);
+
+		//IDが存在しない場合
+		if (!$item_update) {
+			return redirect()->route('admin.index');
+		}
+
 		$item = $request->all();
 		unset($item['_token']);
 		$item_update->fill($item)->save();
 
-		//商品追加後
+		//商品追加後_編集ページアクセス時に取得したセッションを破棄
+		session()->pull('edit_id');
 		return redirect()->route('admin.index');
 	}
 }

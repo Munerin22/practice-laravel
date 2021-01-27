@@ -26,8 +26,8 @@ class ItemAddRequest extends FormRequest
         return [
 			'name' => ['required', 'max:100', 'unique:items,name'],
 			'explain' => ['required', 'max:10000'],
-			'price' => ['required', 'max:100000000', 'numeric'],
-			'stock' => ['required', 'max:1000000', 'numeric'],
+			'price' => ['required', 'max:100000000', 'min:0', 'numeric'],
+			'stock' => ['required', 'max:1000000', 'min:0', 'numeric'],
         ];
     }
 }
