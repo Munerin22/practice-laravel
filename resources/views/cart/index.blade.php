@@ -17,6 +17,7 @@
 <th>値段</th>
 <th>購入数</th>
 <th>小計</th>
+<th></th>
 </tr>
 <!-- カート内の購入金額 -->
 <?php $cost_all = 0 ?>
@@ -28,7 +29,14 @@
 <td>{{$cart['count']}}個</td>
 <!-- 小計を算出 -->
 <?php $cost = $cart['item']['price'] * $cart['count'] ?>
-<td>{{$cost}}円 <a href="{{route('cart.delete', ['id' => $cart['id']])}}">削除</a></td>
+<td>{{$cost}}円</td>
+<td>
+<form method="POST" action="{{route('cart.delete')}}">
+{{ csrf_field() }}
+<input type="hidden" name="id" value="{{$cart['id']}}">
+<input type="submit" value="削除">
+</form>
+</td>
 </tr>
 <?php $cost_all = $cost + $cost_all ?>
 @endforeach

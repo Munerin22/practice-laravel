@@ -25,22 +25,18 @@ class CartController extends Controller
 		return view('cart.index', compact('carts'));
 	}
 
-	//選択した商品をカートから除外
-	public function delete($id = null) {
-		//削除する商品idのurlパラメータ確認
-		if (!$id) {
-			return redirect()->route('cart.index');
-		}
+	//選択した商品をカートから削除
+	public function delete(Request $request) {
 		//urlから選択した商品のユーザーIDを取得
-		$cart_user_id = Cart::where('id', $id)->first(['user_id']);
-		if (!$cart_user_id) {
+		$cart_user = Cart::where('id', $request->id)->first(['user_id']);
+		if (!$cart_user) {
 			return redirect()->route('cart.index');
 		}
 
 		$user_id = Auth::guard('user')->user()->id;
 		//ログインユーザーが他のユーザーのカート内削除の防止
-		if ($user_id === $cart_user_id->user_id) {
-			Cart::where('id', $id)->delete();
+		if ($user_id === $cart_user->user_id) {
+			Cart::where('id', $request->id)->delete();
 		}
 		return redirect()->route('cart.index');
 	}
