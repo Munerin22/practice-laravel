@@ -23,12 +23,12 @@
 @foreach ($carts as $cart)
 <!-- カートのレコード一覧表示 -->
 <tr>
-<td><a href="{{route('detail', ['id' => $cart['id']])}}">{{$cart['item']['name']}}</a></td>
+<td>{{$cart['item']['name']}}</td>
 <td>{{$cart['item']['price']}}円</td>
 <td>{{$cart['count']}}個</td>
 <!-- 小計を算出 -->
 <?php $cost = $cart['item']['price'] * $cart['count'] ?>
-<td>{{$cost}}円</td>
+<td>{{$cost}}円 <a href="{{route('cart.delete', ['id' => $cart['id']])}}">削除</a></td>
 </tr>
 <?php $cost_all = $cost + $cost_all ?>
 @endforeach
