@@ -25,6 +25,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+	Route::get('/cart', 'CartController@index')->name('cart.index');
+
 });
 
 //adminログイン
