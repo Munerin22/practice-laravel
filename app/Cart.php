@@ -15,4 +15,7 @@ class Cart extends Model
 	//ソフトデリート
 	use SoftDeletes;
 	protected $dates = ['deleted_at'];
+
+	//入力OKなカラム
+	protected $fillable = ['item_id', 'count', 'cost', 'user_id'];
 }
