@@ -15,11 +15,6 @@
 
 <form method="POST" action="item">
 {{ csrf_field() }}
-@if ($errors->has('id'))
-<li style="list-style:none"><font color="red">不正なIDです</font></li>
-@endif
-<input type="hidden" name="id" value="{{$item_edit['id']}}">
-
 <ul>
 @if ($errors->has('name'))
 <li style="list-style:none"><font color="red">存在しない商品名を入力してください</font></li>

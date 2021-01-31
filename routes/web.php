@@ -25,6 +25,13 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+	//カートの操作
+	Route::get('/cart', 'CartController@index')->name('cart.index');
+	Route::get('/cart/delete', 'CartController@index');
+	Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
+	Route::get('/cart/add', 'CartController@index');
+	Route::post('/cart/add', 'CartController@add')->name('cart.add');
+
 });
 
 //adminログイン

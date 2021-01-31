@@ -7,6 +7,21 @@
 <div class="panel panel-default">
 <div class="panel-heading">商品情報</div>
 <div class="panel-body">
+@if ($item_detail['stock'] > 0)
+
+@if (Auth::guard('user')->user())
+<form method="POST" action={{route('cart.add')}}>
+{{ csrf_field() }}
+<input type="hidden" name="id" value={{$item_detail['id']}}>
+<input type="submit" value="カートに追加">
+</form>
+@else
+【ログインしてください】
+@endif
+
+@else
+【在庫無し】
+@endif
 <table border="1"align=center>
 <tr>
 <th>商品名</th>

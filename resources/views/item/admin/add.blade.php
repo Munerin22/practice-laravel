@@ -19,22 +19,22 @@
 @if ($errors->has('name'))
 <li style="list-style:none"><font color="red">存在しない商品名を入力してください</font></li>
 @endif
-<li><div>商品名：<input type="text" name="name"></div></li>
+<li><div>商品名：<input type="text" name="name" value="{{ old('name') }}"></div></li>
 
 @if ($errors->has('explain'))
 <li style="list-style:none"><font color="red">1万文字以内で入力してください</font></li>
 @endif
-<li><div>説明：<textarea name="explain"></textarea></div></li>
+<li><div>説明：<textarea name="explain">{{ old('explain') }}</textarea></div></li>
 
 @if ($errors->has('price'))
 <li style="list-style:none"><font color="red">1億円以内(半角数字)で入力してください</font></li>
 @endif
-<li><div>価格：<input type="text" name="price">円</div></li>
+<li><div>価格：<input type="text" name="price" value="{{ old('price') }}">円</div></li>
 
 @if ($errors->has('stock'))
 <li style="list-style:none"><font color="red">100万個以内(半角数字)で入力してください</font></li>
 @endif
-<li><div>在庫：<input type="text" name="stock">個</div></li>
+<li><div>在庫：<input type="text" name="stock" value="{{ old('stock') }}">個</div></li>
 </ul>
 <input type="submit" value="商品の追加">
 </form>

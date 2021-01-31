@@ -25,9 +25,9 @@ class ItemEditRequest extends FormRequest
     {
         return [
             //
-			'name' => ['required', 'max:100', 'unique:items,name,' . $this->id . ',id'],
+			'name' => ['required', 'max:100', 'unique:items,name,' . session()->get('edit_id') . ',id'],
 			'explain' => ['required', 'max:10000'],
-			'stock' => ['required', 'max:1000000', 'numeric'],
+			'stock' => ['required', 'max:1000000', 'min:0', 'numeric'],
         ];
     }
 }
