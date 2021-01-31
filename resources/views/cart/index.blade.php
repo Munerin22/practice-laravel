@@ -7,6 +7,9 @@
 <div class="panel panel-default">
 <div class="panel-heading">カートに追加した商品</div>
 <div class="panel-body">
+@if (Session::has('flash_message'))
+<font color="#ff6699">{{session('flash_message')}}</font><br>
+@endif
 <a href="{{route('index')}}">商品一覧</a><br>
 
 @if (!$carts)

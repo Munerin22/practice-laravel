@@ -30,7 +30,7 @@ class CartController extends Controller
 		$cart_user = Cart::where('id', $request->id)->first();
 		//存在しない商品（ユーザー）であればリダイレクト
 		if (!$cart_user) {
-			return redirect()->route('cart.index');
+			return redirect()->route('cart.index')->with('flash_message', '選択した商品はカートに存在してないです');
 		}
 
 		$user_id = Auth::guard('user')->user()->id;
@@ -53,7 +53,7 @@ class CartController extends Controller
 		//選択した商品の在庫が存在するか確認
 		$item_check = Item::where('id', $request->id)->where('stock', '>', 0)->first();
 		if (!$item_check) {
-			return redirect()->route('cart.index');
+			return redirect()->route('cart.index')->with('flash_message', '選択した商品の在庫はないです');
 		}
 
 		//DBの複数処理_トランザクション
