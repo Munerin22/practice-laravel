@@ -7,6 +7,9 @@
 <div class="panel panel-default">
 <div class="panel-heading">商品一覧</div>
 <div class="panel-body">
+@if (session('flash_message'))
+<font color="#88bb99">{{session('flash_message')}}</font><br>
+@endif
 
 <table border="1"align=center>
 <tr>
