@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Socialite;
 use App\User;
@@ -22,17 +23,21 @@ class SnsController extends Controller
 		} catch(\Exception $e) {
 			return redirect('/sns/twitter/login');
 		}
-		dd($user);
 		//ログインユーザーのIDを取得
 		$user_id = Auth::guard('user')->user()->id;
+
 		//ログインしていればTwitterのユーザー情報を追加・更新
 		if ($user_id) {
 			$user_update = User::find($user_id);
+			//画像名
+			$img_name = substr($user->avatar, strrpos($user->avatar, '/') +1);
+			//サーバーにアップロード
+			Storage::put('public/image/' . $img_name, $user->avatar);
 			$twitter_info = [
 				'twitter_id' => $user->id,
 				'access_token' => $user->token,
 				'access_token_secret' => $user->tokenSecret,
-				'avatar' => $user->avatar,
+				'avatar' => $img_name,
 				'profile' => $user->user['description'],
 			];
 			$user_update->fill($twitter_info)->save();
