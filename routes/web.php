@@ -32,9 +32,6 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/cart/add', 'CartController@index');
 	Route::post('/cart/add', 'CartController@add')->name('cart.add');
 
-	//twitterログイン
-	Route::get('/sns/twitter/login', 'SnsController@getAuth')->name('twitter.login');
-	Route::get('/sns/twitter/callback', 'SnsController@authCallback')->name('twitter.callback');
 });
 
 //adminログイン
@@ -64,4 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('/edit/item', 'ItemController@update')->name('admin.update');
 });
 
+//twitterログイン
+Route::get('/sns/twitter/login', 'Auth\LoginController@getAuth')->name('twitter.login');
+Route::get('/sns/twitter/callback', 'Auth\LoginController@authCallback')->name('twitter.callback');
 

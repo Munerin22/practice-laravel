@@ -23,24 +23,29 @@ class SnsController extends Controller
 		} catch(\Exception $e) {
 			return redirect('/sns/twitter/login');
 		}
-		//ログインユーザーのIDを取得
-		$user_id = Auth::guard('user')->user()->id;
 
-		//ログインしていればTwitterのユーザー情報を追加・更新
-		if ($user_id) {
+		//Twitterから取得した情報を保存するために整理
+		//画像名
+		$img_name = substr($user->avatar, strrpos($user->avatar, '/') +1);
+		//サーバーにアップロード
+		Storage::put('public/image/' . $img_name, $user->avatar);
+		$twitter_info = [
+			'twitter_id' => $user->id,
+			'access_token' => $user->token,
+			'access_token_secret' => $user->tokenSecret,
+			'avatar' => $img_name,
+			'profile' => $user->user['description'],
+		];
+
+		//ログインしていればTwitterのユーザー情報を更新。未ログインであれば新しく追加
+		if (Auth::guard('user')->user()) {
+			//ログインユーザーのIDを取得
+			$user_id = Auth::guard('user')->user()->id;
 			$user_update = User::find($user_id);
-			//画像名
-			$img_name = substr($user->avatar, strrpos($user->avatar, '/') +1);
-			//サーバーにアップロード
-			Storage::put('public/image/' . $img_name, $user->avatar);
-			$twitter_info = [
-				'twitter_id' => $user->id,
-				'access_token' => $user->token,
-				'access_token_secret' => $user->tokenSecret,
-				'avatar' => $img_name,
-				'profile' => $user->user['description'],
-			];
 			$user_update->fill($twitter_info)->save();
+		} else {
+			$user_add = new User;
+			$user_add->fill($twitter_info)->save();
 		}
 
 		return redirect()->route('index')->with('flash_message', 'Twitterログイン成功しました');
