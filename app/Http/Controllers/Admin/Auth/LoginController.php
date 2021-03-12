@@ -52,6 +52,6 @@ class LoginController extends Controller
 	{
 		$this->guard('admin')->logout();
 		// $request->session()->invalidate();全部のSessionを消してしまう
-		return redirect('/');
+		return redirect('/index');
 	}
 }

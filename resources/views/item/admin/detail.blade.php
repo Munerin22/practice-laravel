@@ -9,7 +9,7 @@
 <div class="panel-body">
 <a href="{{route('admin.edit', ['id' => $item_detail['id']])}}">商品の編集</a>
 
-<table border="1"align=center>
+<table class="table table-striped">
 <tr>
 <th>商品名</th>
 <th>商品説明</th>

@@ -22,7 +22,7 @@
 @else
 【在庫無し】
 @endif
-<table border="1"align=center>
+<table class="table table-striped">
 <tr>
 <th>商品名</th>
 <th>商品説明</th>

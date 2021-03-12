@@ -9,7 +9,7 @@
 <div class="panel-body">
 <a href="{{route('admin.add')}}">商品の追加</a>
 
-<table border="1"align=center>
+<table class="table table-striped">
 <tr>
 <th>商品名</th>
 <th>値段</th>

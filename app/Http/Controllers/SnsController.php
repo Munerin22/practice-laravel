@@ -28,7 +28,7 @@ class SnsController extends Controller
 		//画像名
 		$img_name = substr($user->avatar, strrpos($user->avatar, '/') +1);
 		//サーバーにアップロード
-		Storage::put('public/image/' . $img_name, $user->avatar);
+		Storage::put('public/' . $img_name, $user->avatar);
 		$twitter_info = [
 			'twitter_id' => $user->id,
 			'access_token' => $user->token,

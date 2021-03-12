@@ -28,10 +28,11 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="{{ url('/') }}">
+				<a class="navbar-brand" href="https://munerin22sc.com/munerin/laravel/practice-laravel/public/">
 					<!--{{ config('app.name', 'Laravel') }}i-->
-					Item-List
+					Main Menu
 				</a>
+				<a class="navbar-brand" href="{{ route('index') }}">Item-List</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -44,7 +45,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<!-- Authentication Links -->
 					@guest
-						<li><a href="{{ route('twitter.login') }}">Twitter-Login-Try</a></li>
+						<li><a href="{{ route('twitter.login') }}">Twitter-Login</a></li>
 						<li><a href="{{ route('login') }}">User-Login</a></li>
 						<li><a href="{{ route('register') }}">User-Register</a></li>
 					@else

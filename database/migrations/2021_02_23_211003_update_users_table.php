@@ -15,8 +15,8 @@ class UpdateUsersTable extends Migration
     {
         //
 		Schema::table('users', function (Blueprint $table) {
-			$table->string('name')->nullable()->default(null)->change();
-			$table->string('email')->nullable()->default(null)->change();
+				$table->string('name')->nullable()->default(null)->change();
+				$table->string('email')->nullable()->default(null)->change();
 		});
     }
 
@@ -29,8 +29,8 @@ class UpdateUsersTable extends Migration
     {
         //
 		Schema::table('users', function (Blueprint $table) {
-			$table->string('name')->change();
-			$table->string('email')->change();
+				$table->string('name')->change();
+				$table->string('email')->change();
 		});
     }
 }

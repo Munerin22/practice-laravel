@@ -15,8 +15,11 @@
 	//return view('welcome');
 //});
 
+//ホーム画面
+Route::get('/', 'PortController@menu')->name('welcome');
+
 //User側商品ページ
-Route::get('/', 'ItemController@index')->name('index');
+Route::get('/index', 'ItemController@index')->name('index');
 Route::get('/detail/{id?}', 'ItemController@detail')->name('detail');
 
 Auth::routes();

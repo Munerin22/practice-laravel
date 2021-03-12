@@ -47,7 +47,7 @@ class LoginController extends Controller
 	public function logout(Request $request)
 	{
 		$this->guard()->logout();
-		return redirect('/');
+		return redirect('/index');
 	}
 
 	// Socialiteのドライバーにリダイレクトさせる
@@ -64,7 +64,6 @@ class LoginController extends Controller
 			return redirect('/sns/twitter/login');
 		}
 
-		//dd($user);
 		//Twitterから取得した情報を保存するために整理
 		//画像名
 		$img_name = substr($user->avatar, strrpos($user->avatar, '/') +1);
