@@ -32,6 +32,10 @@
 					<!--{{ config('app.name', 'Laravel') }}i-->
 					Main Menu
 				</a>
+				<a class="navbar-brand" href="{{ url('/index') }}">
+					<!--{{ config('app.name', 'Laravel') }}i-->
+					Item List
+				</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -45,7 +49,9 @@
 					<!-- Authentication Links -->
 					@guest
 						<li><a href="https://twitter.com/mt_22sg">Twitter</a></li>
+						<!--
 						<li><a href="https://www.wantedly.com/users/140030344">Wantedly</a></li>
+						-->
 					@else
 					@endguest
 				</ul>

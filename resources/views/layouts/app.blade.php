@@ -28,7 +28,7 @@
 				</button>
 
 				<!-- Branding Image -->
-				<a class="navbar-brand" href="https://munerin22sc.com/munerin/laravel/practice-laravel/public/">
+				<a class="navbar-brand" href="{{ url('/') }}">
 					<!--{{ config('app.name', 'Laravel') }}i-->
 					Main Menu
 				</a>
