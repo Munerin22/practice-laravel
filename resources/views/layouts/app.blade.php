@@ -67,6 +67,11 @@
 										{{ csrf_field() }}
 									</form>
 								</li>
+								<li>
+									<a href="{{ route('address.index') }}">
+										お届け先一覧
+									</a>
+								</li>
 							</ul>
 						</li>
 					@endguest

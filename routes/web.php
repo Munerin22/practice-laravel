@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/cart/add', 'CartController@index');
 	Route::post('/cart/add', 'CartController@add')->name('cart.add');
 
+	//お届け先住所の操作
+	Route::get('/address', 'AddressController@index')->name('address.index');
 });
 
 //adminログイン
