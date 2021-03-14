@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/address', 'AddressController@index')->name('address.index');
 	Route::get('/address/add', 'AddressController@add');
 	Route::get('/address/add/form', function() {
-		return view('address.add.form');
+		return view('address.add');
 	})->name('address.add.form');
 	Route::get('/address/add', 'AddressController@add')->name('address.add');
 });
