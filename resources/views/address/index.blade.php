@@ -11,7 +11,7 @@
 <font color="#88bb99">{{session('flash_message')}}</font><br>
 @endif
 
-<div><a href="{{route('address.add.form')}}">新規登録</a>
+<div><a href="{{route('address.add.form', ['id' => $user_id])}}">新規登録</a>
 <table class="table table-striped">
 <tr>
 <th>お名前</th>

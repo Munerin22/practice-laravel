@@ -13,7 +13,8 @@
 <li style="list-style:none"><font color="red">==入力内容に不備があります==</font></li>
 @endif
 
-<form method="POST" action="add/item">
+
+<form method="POST" action="{{route('address.add')}}">
 {{ csrf_field() }}
 <ul>
 @if ($errors->has('name'))

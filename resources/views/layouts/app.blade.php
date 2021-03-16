@@ -68,7 +68,7 @@
 									</form>
 								</li>
 								<li>
-									<a href="{{ route('address.index') }}">
+									<a href="{{ route('address.index', ['id' => Auth::user()->id]) }}">
 										お届け先一覧
 									</a>
 								</li>
