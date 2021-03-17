@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\Address;
+use App\Http\Requests\AddresseeRequest;
 use App\Addressee;
 
 class AddressController extends Controller
@@ -32,10 +32,11 @@ class AddressController extends Controller
 	}
 
 	//送り先の追加
-	public function add(Addressee $request) {
+	public function add(AddresseeRequest $request) {
 		$addressee_add = new Addressee;
 		$address = $request->all();
 		unset($address['_token']);
+		dd($address);
 		$addressee_add->fill($address)->save();
 
 		//送り先追加後

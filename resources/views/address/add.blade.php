@@ -9,11 +9,6 @@
 <div class="panel-body">
 <a href="{{route('address.index')}}">お届け先 一覧</a>
 
-@if (count($errors) > 0)
-<li style="list-style:none"><font color="red">==入力内容に不備があります==</font></li>
-@endif
-
-
 <form method="POST" action="{{route('address.add')}}">
 {{ csrf_field() }}
 <ul>
@@ -21,26 +16,31 @@
 <li style="list-style:none"><font color="red">お届け先のお名前を入力してください</font></li>
 @endif
 <li><div>お名前：<input type="text" name="name" value="{{ old('name') }}"></div></li>
+----------
 
 @if ($errors->has('post_number'))
 <li style="list-style:none"><font color="red">半角数字のみで入力してください</font></li>
 @endif
 <li><div>〒郵便番号：<input type="text" name="post_number" value="{{ old('post_number') }}"></div></li>
+----------
 
 @if ($errors->has('prefecture'))
 <li style="list-style:none"><font color="red">都道府県名を入力してください</font></li>
 @endif
 <li><div>都道府県名：<input type="text" name="prefecture" value="{{ old('prefecture') }}"></div></li>
+----------
 
 @if ($errors->has('city'))
-<li style="list-style:none"><font color="red">入力してください</font></li>
+<li style="list-style:none"><font color="red">市町村名を入力してください</font></li>
 @endif
 <li><div>市町村名：<input type="text" name="city" value="{{ old('city') }}"></div></li>
+----------
 
 @if ($errors->has('below_address'))
-<li style="list-style:none"><font color="red">入力してください</font></li>
+<li style="list-style:none"><font color="red">市町村以降を入力してください</font></li>
 @endif
 <li><div>市町村以降の住所：<input type="text" name="below_address" value="{{ old('below_address') }}"></div></li>
+----------
 
 @if ($errors->has('phone'))
 <li style="list-style:none"><font color="red">半角数字のみで入力してください</font></li>
