@@ -27,7 +27,13 @@
 @if ($errors->has('prefecture'))
 <li style="list-style:none"><font color="red">都道府県名を入力してください</font></li>
 @endif
-<li><div>都道府県名：<input type="text" name="prefecture" value="{{ old('prefecture') }}"></div></li>
+<li><div>都道府県名：
+<select name="prefecture" value="{{ old('prefecture') }}">
+@foreach ($prefectures as $prefecture)
+<option value="{{ $prefecture['name'] }}">{{ $prefecture['name'] }}</option>
+@endforeach
+</select>
+</div></li>
 ----------
 
 @if ($errors->has('city'))

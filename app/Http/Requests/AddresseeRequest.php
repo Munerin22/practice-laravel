@@ -26,11 +26,11 @@ class AddresseeRequest extends FormRequest
         return [
             //
 			'name' => ['required', 'max:50'],
-			'post_number' => ['required', 'integer', 'numeric', 'string', 'digits:7'],
-			'prefecture' => ['required', 'regex:'],
+			'post_number' => ['required', 'numeric', 'string', 'regex:/^[0-9]{7}/'],
+			'prefecture' => ['required'],
 			'city' => ['required', 'string'],
 			'below_address' => ['required', 'max:500'],
-			'phone' => ['required', 'max:11', 'numeric', 'integer']
+			'phone' => ['required', 'numeric', 'string', 'regex:/^[0-9]{11}/']
         ];
     }
 }

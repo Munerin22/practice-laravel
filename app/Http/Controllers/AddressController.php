@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddresseeRequest;
 use App\Addressee;
+use App\Prefecture;
 
 class AddressController extends Controller
 {
@@ -31,12 +32,21 @@ class AddressController extends Controller
 
 	}
 
+	//送り先追加フォーム
+	public function addform() {
+		$prefectures = Prefecture::all();
+		return view('address.add', compact('prefectures'));
+	}
+
 	//送り先の追加
 	public function add(AddresseeRequest $request) {
 		$addressee_add = new Addressee;
 		$address = $request->all();
 		unset($address['_token']);
 		dd($address);
+		if (!Prefecture::where('name', $address['prefecture'])) {
+			return redirect()->route('index');
+		}
 		$addressee_add->fill($address)->save();
 
 		//送り先追加後
