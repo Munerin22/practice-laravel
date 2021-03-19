@@ -11,6 +11,8 @@
 
 <form method="POST" action="{{route('address.add')}}">
 {{ csrf_field() }}
+<input type="hidden" name="user_id" value="{{Auth()->user()->id}}">
+
 <ul>
 @if ($errors->has('name'))
 <li style="list-style:none"><font color="red">お届け先のお名前を入力してください</font></li>
@@ -53,7 +55,6 @@
 @endif
 <li><div>電話番号：<input type="text" name="phone" value="{{ old('phone') }}"></div></li>
 </ul>
-<input type="hidden" value="{{Auth()->user()->id}}">
 <input type="submit" value="お届け先の住所を追加">
 </form>
 

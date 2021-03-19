@@ -11,16 +11,10 @@ use App\Prefecture;
 class AddressController extends Controller
 {
     //
-	public function index($user = null) {
-		$user = (int)$user;
+	public function index() {
 
 		//ログインユーザーのIDを取得
 		$user_id = Auth::guard('user')->user()->id;
-
-		//ログインユーザーの判別
-		if ($user_id !== $user) {
-			return redirect()->route('index');
-		}
 
 		$addressees = null;
 		//ログインユーザーがAddressテーブルにレコードを持っているか確認
@@ -43,13 +37,13 @@ class AddressController extends Controller
 		$addressee_add = new Addressee;
 		$address = $request->all();
 		unset($address['_token']);
-		dd($address);
+		//dd($address);
 		if (!Prefecture::where('name', $address['prefecture'])) {
 			return redirect()->route('index');
 		}
 		$addressee_add->fill($address)->save();
 
 		//送り先追加後
-		return redirect()->route('address.index');
+		return redirect()->route('address.index')->with('flash_message', '送り先を追加しました');
 	}
 }
