@@ -32,7 +32,11 @@
 <li><div>都道府県名：
 <select name="prefecture" value="{{ $address['prefecture'] }}">
 @foreach ($prefectures as $prefecture)
+@if ($address['prefecture'] == $prefecture['name'])
+<option value="{{ $prefecture['name'] }}" selected>{{ $prefecture['name'] }}</option>
+@else
 <option value="{{ $prefecture['name'] }}">{{ $prefecture['name'] }}</option>
+@endif
 @endforeach
 </select>
 </div></li>
