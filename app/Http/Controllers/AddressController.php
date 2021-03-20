@@ -28,6 +28,7 @@ class AddressController extends Controller
 
 	//送り先追加フォーム
 	public function addform() {
+		//都道府県名の取得
 		$prefectures = Prefecture::all();
 		return view('address.add', compact('prefectures'));
 	}
@@ -37,7 +38,6 @@ class AddressController extends Controller
 		$addressee_add = new Addressee;
 		$address = $request->all();
 		unset($address['_token']);
-		//dd($address);
 		if (!Prefecture::where('name', $address['prefecture'])) {
 			return redirect()->route('index');
 		}
@@ -45,5 +45,37 @@ class AddressController extends Controller
 
 		//送り先追加後
 		return redirect()->route('address.index')->with('flash_message', '送り先を追加しました');
+	}
+
+	//送り先の編集
+	public function editform($address_id = null) {
+
+		$address = Addressee::where('id', $address_id)->first();
+		//dd($address['user_id']);
+		if (!$address || $address['user_id'] !== Auth::guard('user')->user()->id) {
+			return redirect()->route('index');
+		}
+
+		//都道府県名の取得
+		$prefectures = Prefecture::all();
+
+		return view('address.edit', compact('address', 'prefectures'));
+	}
+
+	//送り先の更新
+	public function edit(AddresseeRequest $request) {
+		$address_update = Addressee::find($request->id);
+		//dd(Auth::guard('user')->user()->id);
+
+		if (!$address_update || $address_update['user_id'] !== Auth::guard('user')->user()->id) {
+			return redirect()->route('index');
+		}
+
+		$address = $request->all();
+		unset($address['_token']);
+		$address_update->fill($address)->save();
+
+		//送り先編集後
+		return redirect()->route('address.index')->with('flash_message', '送り先を編集しました');
 	}
 }

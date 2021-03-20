@@ -30,7 +30,7 @@
 {{$address['below_address']}}
 <td>{{$address['phone']}}</td>
 </td>
-<td><a href="{{route('address.edit', ['id' => $address['id']])}}">編集</a>|
+<td><a href="{{route('address.edit.form', ['id' => $address['id']])}}">編集</a>|
 <a href="{{route('address.delete', ['id' => $address['id']])}}">削除</a>
 </td>
 </tr>

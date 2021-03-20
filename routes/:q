@@ -39,8 +39,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/address/index', 'AddressController@index')->name('address.index');
 	Route::get('/address/add/{id?}', 'AddressController@addform')->name('address.add.form');
 	Route::post('/address/add', 'AddressController@add')->name('address.add');
-	Route::get('/address/edit/{id?}', 'AddressController@editform')->name('address.edit.form');
-	Route::post('/address/edit', 'AddressController@edit')->name('address.edit');
+	Route::get('/address/edit/{id?}', 'AddressController@edit')->name('address.edit');
 	Route::get('/address/delete/{id?}', 'AddressController@delete')->name('address.delete');
 });
 
