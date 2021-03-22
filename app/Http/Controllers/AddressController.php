@@ -51,7 +51,6 @@ class AddressController extends Controller
 	public function editform($address_id = null) {
 
 		$address = Addressee::where('id', $address_id)->first();
-		//dd($address['user_id']);
 		if (!$address || $address['user_id'] !== Auth::guard('user')->user()->id) {
 			return redirect()->route('index');
 		}
@@ -65,7 +64,6 @@ class AddressController extends Controller
 	//送り先の更新
 	public function edit(AddresseeRequest $request) {
 		$address_update = Addressee::find($request->id);
-		//dd(Auth::guard('user')->user()->id);
 
 		if (!$address_update || $address_update['user_id'] !== Auth::guard('user')->user()->id) {
 			return redirect()->route('index');
@@ -77,5 +75,18 @@ class AddressController extends Controller
 
 		//送り先編集後
 		return redirect()->route('address.index')->with('flash_message', '送り先を編集しました');
+	}
+
+	//送り先の削除
+	public function delete($address_id = null) {
+		$address = Addressee::find($address_id);
+		if (!$address || $address['user_id'] !== Auth::guard('user')->user()->id) {
+			return redirect()->route('index');
+		}
+
+		Addressee::where('id', $address_id)->delete();
+
+		//送り先削除後
+		return redirect()->route('address.index')->with('flash_message', '送り先を削除しました');
 	}
 }
