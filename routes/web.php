@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
 	Route::get('/cart/add', 'CartController@index');
 	Route::post('/cart/add', 'CartController@add')->name('cart.add');
+	Route::get('/cart/send', 'CartController@send')->name('cart.send');
 
 	//お届け先住所の操作
 	Route::get('/address/index', 'AddressController@index')->name('address.index');
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::get('/address/edit/{id?}', 'AddressController@editform')->name('address.edit.form');
 	Route::post('/address/edit', 'AddressController@edit')->name('address.edit');
 	Route::get('/address/delete/{id?}', 'AddressController@delete')->name('address.delete');
+
 });
 
 //adminログイン

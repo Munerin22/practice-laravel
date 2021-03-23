@@ -10,7 +10,9 @@
 @if (Session::has('flash_message'))
 <font color="#ff6699">{{session('flash_message')}}</font><br>
 @endif
-<a href="{{route('index')}}">商品一覧</a><br>
+<a href="{{route('index')}}">商品一覧</a>
+
+<button type="button" onclick="location.href='{{route('cart.send')}}'">送り先の選択</button>
 
 @if (!$carts)
 カートに何も入っていません
