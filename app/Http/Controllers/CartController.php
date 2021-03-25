@@ -82,20 +82,4 @@ class CartController extends Controller
 		});
 		return redirect()->route('cart.index');
 	}
-
-	//カートから送り先選択画面へ
-	public function send() {
-
-		//ログインユーザーのIDを取得
-		$user_id = Auth::guard('user')->user()->id;
-
-		$addressees = null;
-		//ログインユーザーがAddressテーブルにレコードを持っているか確認
-		if (Addressee::where('user_id', $user_id)) {
-			//ログインユーザーのお届け先住所を取得
-			$addressees = Addressee::where('user_id', $user_id)->get();
-		}
-		return view('cart.send', compact('addressees', 'user_id'));
-
-	}
 }

@@ -55,6 +55,7 @@
 @endif
 <li><div>電話番号：<input type="text" name="phone" value="{{ old('phone') }}"></div></li>
 </ul>
+<input type="hidden" value="{{ $view }}">
 <input type="submit" value="お届け先の住所を追加">
 </form>
 

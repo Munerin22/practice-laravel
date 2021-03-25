@@ -10,10 +10,8 @@ use App\Prefecture;
 
 class AddressController extends Controller
 {
-    //
-	public function index() {
-
-		//ログインユーザーのIDを取得
+	//送り先情報の取得
+	function sendInfomation() {
 		$user_id = Auth::guard('user')->user()->id;
 
 		$addressees = null;
@@ -22,19 +20,40 @@ class AddressController extends Controller
 			//ログインユーザーのお届け先住所を取得
 			$addressees = Addressee::where('user_id', $user_id)->get();
 		}
-		return view('address.index', compact('addressees', 'user_id'));
+		return [$addressees, $user_id];
+	}
 
+	//送り先一覧の表示
+	public function index() {
+
+		list($addressees, $user_id) = $this->sendInfomation();
+
+		return view('address.index', compact('addressees', 'user_id'));
 	}
 
 	//送り先追加フォーム
 	public function addform() {
+
+		//送り先追加後の画面
+		$view = 'address.index';
+
+		//直前のURL情報を取得
+		$url = url()->previous();
+		if (strpos($url, 'cart/send') !== false) {
+			$view = 'cart.send';
+		}
+
 		//都道府県名の取得
 		$prefectures = Prefecture::all();
-		return view('address.add', compact('prefectures'));
+		return view('address.add', compact('prefectures', 'view'));
 	}
 
 	//送り先の追加
 	public function add(AddresseeRequest $request) {
+
+		$view = $request['view'];
+		unset($request['view']);
+
 		$addressee_add = new Addressee;
 		$address = $request->all();
 		unset($address['_token']);
@@ -88,5 +107,12 @@ class AddressController extends Controller
 
 		//送り先削除後
 		return redirect()->route('address.index')->with('flash_message', '送り先を削除しました');
+	}
+
+
+	//カートから送り先選択画面へ
+	public function cartsend() {
+		list($addressees, $user_id) = $this->sendInfomation();
+		return view('cart.send', compact('addressees', 'user_id'));
 	}
 }

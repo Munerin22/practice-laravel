@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function() {;
 	Route::post('/cart/delete', 'CartController@delete')->name('cart.delete');
 	Route::get('/cart/add', 'CartController@index');
 	Route::post('/cart/add', 'CartController@add')->name('cart.add');
-	Route::get('/cart/send', 'CartController@send')->name('cart.send');
+	Route::get('/cart/send', 'AddressController@cartsend')->name('cart.send');
 
 	//お届け先住所の操作
 	Route::get('/address/index', 'AddressController@index')->name('address.index');
