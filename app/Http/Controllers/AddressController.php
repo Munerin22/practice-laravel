@@ -25,9 +25,7 @@ class AddressController extends Controller
 
 	//送り先一覧の表示
 	public function index() {
-
 		list($addressees, $user_id) = $this->sendInfomation();
-
 		return view('address.index', compact('addressees', 'user_id'));
 	}
 
@@ -51,11 +49,10 @@ class AddressController extends Controller
 	//送り先の追加
 	public function add(AddresseeRequest $request) {
 
-		$view = $request['view'];
-		unset($request['view']);
-
 		$addressee_add = new Addressee;
 		$address = $request->all();
+		$view = $address['url'];
+		unset($address['url']);
 		unset($address['_token']);
 		if (!Prefecture::where('name', $address['prefecture'])) {
 			return redirect()->route('index');
@@ -63,6 +60,9 @@ class AddressController extends Controller
 		$addressee_add->fill($address)->save();
 
 		//送り先追加後
+		if ($view == 'cart.send') {
+			return redirect()->route('cart.send')->with('flash_message', '送り先を追加しました');
+		}
 		return redirect()->route('address.index')->with('flash_message', '送り先を追加しました');
 	}
 
