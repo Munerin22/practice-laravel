@@ -74,10 +74,18 @@ class AddressController extends Controller
 			return redirect()->route('index');
 		}
 
+		//送り先編集後の画面
+		$view = 'address.index';
+		//直前のURL情報を取得
+		$url = url()->previous();
+		if (strpos($url, 'cart/send') !== false) {
+			$view = 'cart.send';
+		}
+
 		//都道府県名の取得
 		$prefectures = Prefecture::all();
 
-		return view('address.edit', compact('address', 'prefectures'));
+		return view('address.edit', compact('address', 'prefectures', 'view'));
 	}
 
 	//送り先の更新
@@ -89,10 +97,15 @@ class AddressController extends Controller
 		}
 
 		$address = $request->all();
+		$view = $address['url'];
+		unset($address['url']);
 		unset($address['_token']);
 		$address_update->fill($address)->save();
 
 		//送り先編集後
+		if ($view == 'cart.send') {
+			return redirect()->route('cart.send')->with('flash_message', '送り先を編集しました');
+		}
 		return redirect()->route('address.index')->with('flash_message', '送り先を編集しました');
 	}
 
