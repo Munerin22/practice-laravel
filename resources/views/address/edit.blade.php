@@ -7,7 +7,11 @@
 <div class="panel panel-default">
 <div class="panel-heading">お届け先の編集</div>
 <div class="panel-body">
+@if ($view == 'cart.send')
+<a href="{{route('cart.send')}}">お届け先 一覧</a>
+@else
 <a href="{{route('address.index')}}">お届け先 一覧</a>
+@endif
 
 <form method="POST" action="{{route('address.edit')}}">
 {{ csrf_field() }}
@@ -23,7 +27,7 @@
 @if ($errors->has('post_number'))
 <li style="list-style:none"><font color="red">半角数字のみで入力してください</font></li>
 @endif
-<li><div>〒郵便番号：<input type="text" name="post_number" value="{{ $address['post_number'] }}"></div></li>
+<li><div>〒郵便番号：<input type="text" name="post_number" value="{{ $address['post_number'] }}">※ハイフンなし（例）1237777</div></li>
 ----------
 
 @if ($errors->has('prefecture'))
@@ -57,7 +61,7 @@
 @if ($errors->has('phone'))
 <li style="list-style:none"><font color="red">半角数字のみで入力してください</font></li>
 @endif
-<li><div>電話番号：<input type="text" name="phone" value="{{ $address['phone'] }}"></div></li>
+<li><div>電話番号：<input type="text" name="phone" value="{{ $address['phone'] }}">※ハイフンなし（例）0120444777</div></li>
 </ul>
 <input type="hidden" name="url" value="{{ $view }}">
 <input type="submit" value="お届け先の住所を更新">
