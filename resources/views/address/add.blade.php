@@ -15,7 +15,6 @@
 
 <form method="POST" action="{{route('address.add')}}">
 {{ csrf_field() }}
-<input type="hidden" name="user_id" value="{{Auth()->user()->id}}">
 
 <ul>
 @if ($errors->has('name'))

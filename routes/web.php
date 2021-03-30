@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function() {;
 
 	//お届け先住所の操作
 	Route::get('/address/index', 'AddressController@index')->name('address.index');
-	Route::get('/address/add/{id?}', 'AddressController@addform')->name('address.add.form');
+	Route::get('/address/add', 'AddressController@addform')->name('address.add.form');
 	Route::post('/address/add', 'AddressController@add')->name('address.add');
 	Route::get('/address/edit/{id?}', 'AddressController@editform')->name('address.edit.form');
 	Route::post('/address/edit', 'AddressController@edit')->name('address.edit');

@@ -30,7 +30,7 @@ class AddresseeRequest extends FormRequest
 			'prefecture' => ['required'],
 			'city' => ['required', 'string'],
 			'below_address' => ['required', 'max:500'],
-			'phone' => ['required', 'numeric', 'string', 'regex:/^[0-9]{10,11}/']
+			'phone' => ['required', 'numeric', 'string', 'regex:/^[0-9]{10,11}$/']
         ];
     }
 }
