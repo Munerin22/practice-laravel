@@ -72,6 +72,8 @@ class AddressController extends Controller
 		if (!Prefecture::where('name', $address['prefecture'])) {
 			return redirect()->route('index');
 		}
+
+		//送り先の追加
 		$addressee_add->fill($address)->save();
 
 		//送り先追加後
@@ -106,15 +108,28 @@ class AddressController extends Controller
 	//送り先の更新
 	public function edit(AddresseeRequest $request) {
 		$address_update = Addressee::find($request->id);
-
-		if (!$address_update || $address_update['user_id'] !== Auth::guard('user')->user()->id) {
+		$user_id = Auth::guard('user')->user()->id;
+		if (!$address_update || $address_update['user_id'] !== $user_id) {
 			return redirect()->route('index');
 		}
 
 		$address = $request->all();
+
+		$user_address = Addressee::whereRaw('user_id = ? and prefecture = ? and city = ? and below_address = ?', array($user_id, $address['prefecture'], $address['city'], $address['below_address']))->get();
+
 		$view = $address['url'];
 		unset($address['url']);
 		unset($address['_token']);
+
+		//追加する送り先をユーザーが既に登録している場合
+		if (current($user_address)) {
+			if ($view == 'cart.send') {
+				return redirect()->route('cart.send')->with('flash_message', '既に登録されています');
+			}
+			return redirect()->route('address.index')->with('flash_message', '既に登録されています');
+		}
+
+		//送り先の編集
 		$address_update->fill($address)->save();
 
 		//送り先編集後

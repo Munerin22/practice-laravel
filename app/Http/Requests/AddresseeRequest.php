@@ -26,7 +26,7 @@ class AddresseeRequest extends FormRequest
         return [
             //
 			'name' => ['required', 'max:50'],
-			'post_number' => ['required', 'numeric', 'string', 'regex:/^[0-9]{7}/'],
+			'post_number' => ['required', 'numeric', 'string', 'regex:/^[0-9]{7}$/'],
 			'prefecture' => ['required'],
 			'city' => ['required', 'string'],
 			'below_address' => ['required', 'max:500'],
