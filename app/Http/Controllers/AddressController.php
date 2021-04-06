@@ -107,6 +107,9 @@ class AddressController extends Controller
 
 	//送り先の更新
 	public function edit(AddresseeRequest $request) {
+		//郵便番号と電話番号の追加バリデーション
+		$this->numberValidation($request);
+
 		$address_update = Addressee::find($request->id);
 		$user_id = Auth::guard('user')->user()->id;
 		if (!$address_update || $address_update['user_id'] !== $user_id) {
@@ -138,6 +141,28 @@ class AddressController extends Controller
 		}
 		return redirect()->route('address.index')->with('flash_message', '送り先を編集しました');
 	}
+
+	//送り先の追加・編集時の追加バリデーション
+	public function numberValidation($number) {
+		$rules = [
+			'post_number' => '/^[0-9]{7}$/',
+			'phone_number' => '/^[0-9]{10,11}$/'
+		];
+
+		$messages = [
+			'post_number' => '桁数が違います',
+			'phone_number' => '桁数が違います'
+		];
+
+		if (!preg_match($rules['post_number'], $number['post_number'])) {
+			dd(3);
+		}
+		if (!preg_match($rules['phone_number'], $number['phone_number'])) {
+
+		}
+
+	}
+
 
 	//送り先の削除
 	public function delete($address_id = null) {
