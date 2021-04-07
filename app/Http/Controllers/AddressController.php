@@ -146,19 +146,23 @@ class AddressController extends Controller
 	public function numberValidation($number) {
 		$rules = [
 			'post_number' => '/^[0-9]{7}$/',
-			'phone_number' => '/^[0-9]{10,11}$/'
+			'phone' => '/^[0-9]{10,11}$/'
 		];
+		$validator = [];
 
-		$messages = [
-			'post_number' => '桁数が違います',
-			'phone_number' => '桁数が違います'
-		];
-
-		if (!preg_match($rules['post_number'], $number['post_number'])) {
-			dd(3);
+		foreach ($rules as $rule => $regex) {
+			if (!preg_match($regex, $number[$rule])) {
+				$validator = array_add($validator, $rule, '桁数が違います');
+			}
 		}
-		if (!preg_match($rules['phone_number'], $number['phone_number'])) {
 
+		if ($validator) {
+			$url = url()->previous();
+			$string_url = strpos($url, 'address');
+			$string_page = substr($url, 50);
+			//dd($string_page);
+			return redirect('/index');
+			//return redirect("$string_page");
 		}
 
 	}
